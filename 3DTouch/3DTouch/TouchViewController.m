@@ -23,6 +23,10 @@
     UIApplicationShortcutItem * item = [[UIApplicationShortcutItem alloc]initWithType:@"two" localizedTitle:@"第二个标签" localizedSubtitle:@"选我" icon:[UIApplicationShortcutIcon iconWithType:UIApplicationShortcutIconTypePlay] userInfo:@{@"Touch":@"3D"}];
     //添加
     [UIApplication sharedApplication].shortcutItems = @[item];
+    
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+    view.backgroundColor = [UIColor yellowColor];
+    [self.view addSubview:view];
 }
 
 //上拉的二级菜单

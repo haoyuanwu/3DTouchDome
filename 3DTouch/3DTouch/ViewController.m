@@ -38,6 +38,9 @@
     [super viewDidLoad];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(touchPush) name:@"push" object:nil];
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"push"]) {
+        [self touchPush];
+    }
     
     [self.view addSubview:self.tabelView];
 }

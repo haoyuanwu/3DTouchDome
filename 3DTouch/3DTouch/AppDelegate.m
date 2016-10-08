@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "TouchViewController.h"
+#import "ViewController.h"
 
 @interface AppDelegate ()
 
@@ -15,14 +16,47 @@
 
 @implementation AppDelegate
 
+//- (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(nullable NSDictionary *)launchOptions{
+//    
+//    
+//    
+//    UIApplicationShortcutItem *shortcutItem = launchOptions[@"UIApplicationLaunchOptionsShortcutItemKey"];
+//    if (shortcutItem) {
+//        
+//        if ([shortcutItem.localizedTitle isEqualToString:@"第二个标签"]) {
+//            UIAlertView *a = [[UIAlertView alloc] initWithTitle:shortcutItem.localizedTitle message:nil delegate:nil cancelButtonTitle:@"1" otherButtonTitles: nil];
+//            [a show];
+//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                
+//                
+//                TouchViewController *VC = [[TouchViewController alloc] init];
+//                [[UIApplication sharedApplication].keyWindow.rootViewController.navigationController pushViewController:VC animated:YES];
+//                
+//            });
+//        }else{
+//            
+//        }
+//        
+//        return NO;
+//    }
+//    return YES;
+//}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    id string = launchOptions[@"UIApplicationLaunchOptionsShortcutItemKey"];
-    if (string) {
+    UIApplicationShortcutItem *shortcutItem = launchOptions[@"UIApplicationLaunchOptionsShortcutItemKey"];
+    if (shortcutItem) {
+        
+        if ([shortcutItem.localizedTitle isEqualToString:@"第二个标签"]) {
+            TouchViewController *VC = [[TouchViewController alloc] init];
+            [(UINavigationController *)self.window.rootViewController pushViewController:VC animated:YES];
+        }else{
+            
+        }
+        
         return NO;
     }
-    
+
     // Override point for customization after application launch.
     return YES;
 }
@@ -56,11 +90,12 @@
     [self saveContext];
 }
 
-
 - (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void(^)(BOOL succeeded))completionHandler{
     NSDictionary *dict = shortcutItem.userInfo;
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [alert showViewController:self.window.rootViewController sender:nil];
     if ([dict[@"Touch"] isEqualToString:@"3D"]) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [[NSNotificationCenter defaultCenter] postNotificationName:@"push" object:nil];
         });
     }
