@@ -24,9 +24,16 @@
     //添加
     [UIApplication sharedApplication].shortcutItems = @[item];
     
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
-    view.backgroundColor = [UIColor yellowColor];
-    [self.view addSubview:view];
+    UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    [self.view addSubview:image];
+    
+}
+
+//获取3DTouch按压力度
+- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    NSArray *arr = touches.allObjects;
+    UITouch *touch = arr.lastObject;
+    NSLog(@"%f",touch.force);
 }
 
 //上拉的二级菜单

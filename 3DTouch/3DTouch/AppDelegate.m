@@ -16,32 +16,6 @@
 
 @implementation AppDelegate
 
-//- (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(nullable NSDictionary *)launchOptions{
-//    
-//    
-//    
-//    UIApplicationShortcutItem *shortcutItem = launchOptions[@"UIApplicationLaunchOptionsShortcutItemKey"];
-//    if (shortcutItem) {
-//        
-//        if ([shortcutItem.localizedTitle isEqualToString:@"第二个标签"]) {
-//            UIAlertView *a = [[UIAlertView alloc] initWithTitle:shortcutItem.localizedTitle message:nil delegate:nil cancelButtonTitle:@"1" otherButtonTitles: nil];
-//            [a show];
-//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//                
-//                
-//                TouchViewController *VC = [[TouchViewController alloc] init];
-//                [[UIApplication sharedApplication].keyWindow.rootViewController.navigationController pushViewController:VC animated:YES];
-//                
-//            });
-//        }else{
-//            
-//        }
-//        
-//        return NO;
-//    }
-//    return YES;
-//}
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     UIApplicationShortcutItem *shortcutItem = launchOptions[@"UIApplicationLaunchOptionsShortcutItemKey"];

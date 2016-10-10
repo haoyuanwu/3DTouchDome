@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "TouchViewController.h"
+#import "TableViewCell.h"
 
 @interface HeaderView : UIView
 
@@ -65,7 +66,7 @@
         _tabelView.tableHeaderView = self.headerView;
         _tabelView.delegate = self;
         _tabelView.dataSource = self;
-        [_tabelView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cellid"];
+        [_tabelView registerClass:[TableViewCell class] forCellReuseIdentifier:@"cellid"];
     }
     return _tabelView;
 }
@@ -75,7 +76,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellid" forIndexPath:indexPath];
+    TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellid" forIndexPath:indexPath];
     
     cell.textLabel.text = @"按我";
     
@@ -102,7 +103,8 @@
     return YES;
 }
 
-- (nullable UIViewController *)previewingContext:(id <UIViewControllerPreviewing>)previewingContext viewControllerForLocation:(CGPoint)location{
+- (nullable UIViewController *)previewingContext:(id <UIViewControllerPreviewing>)previewingContext viewControllerForLocation:(CGPoint)location
+{
     UIView *view = previewingContext.sourceView;
     
     TouchViewController *touchView = [[TouchViewController alloc] init];
@@ -114,7 +116,21 @@
     //按压中的视图位置
     previewingContext.sourceRect = CGRectMake(0, 0, self.view.frame.size.width, view.frame.size.height);
     
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    NSArray *arr = window.subviews;
+    UIView *transitionView = window.subviews.lastObject;
+    UIView *contentView = transitionView.subviews.lastObject;
+    UIView *touchV = contentView.subviews.lastObject;
+    
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
+    [touchV addGestureRecognizer:pan];
+    
+    
     return touchView;
+}
+
+- (void)pan:(UIPanGestureRecognizer *)sernder{
+    NSLog(@"asd");
 }
 
 //处于touch状态时再次按压调用
